@@ -90,15 +90,14 @@ The goal is to demonstrate **production-aligned design thinking**, not blind aut
 
 ---
 
-## 🧪 How to Run
+🧪 How to Run
 
-### 1️⃣ Setup Environment
+1️⃣ Setup Environment
 
-```bash
-python3.10 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
+    ```bash
+        python3.10 -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
 
 
 2️⃣ Start the API Server
