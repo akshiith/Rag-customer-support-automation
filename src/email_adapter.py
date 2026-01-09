@@ -4,7 +4,7 @@ from pathlib import Path
 OUTBOX_DIR = Path("outbox")
 OUTBOX_DIR.mkdir(exist_ok=True)
 
-def send_email(to_email: str, subject: str, body: str):
+def send_email(to_email: str, subject: str, body: str) -> str:
     """
     Simulated email sender.
     Writes email to outbox as a .txt file.

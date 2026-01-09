@@ -1,34 +1,25 @@
-# =========================
-# Virtual Environment
-# =========================
-.venv/
-venv/
-
-# =========================
-# Secrets & Credentials
-# =========================
-automation/credentials.json
-automation/token.json
+# 🔐 Secrets
 .env
+automation/token.json
+automation/credentials.json
 
-# =========================
-# Vector DB / Runtime Data
-# =========================
+# 🧠 Vector DB / indexes
 chroma_db/
-drafts/
-logs/
-outbox/
+knowledge_base/
+*.pkl
 
-# =========================
-# Python junk
-# =========================
+# 📨 Runtime artifacts
+drafts/
+outbox/
+logs/
+
+# 🧪 Python junk
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
-# =========================
-# ML artifacts
-# =========================
-*.pkl
-*.bin
-*.sqlite3
+# 🐍 Virtual env
+venv/
+
+# 🍎 OS
+.DS_Store
