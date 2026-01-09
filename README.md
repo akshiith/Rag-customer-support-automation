@@ -92,84 +92,84 @@ The goal is to demonstrate **production-aligned design thinking**, not blind aut
 
 🧪 How to Run
 
-    1️⃣ Setup Environment
+1️⃣ Setup Environment
 
-        ```bash
-            python3.10 -m venv venv
-            source venv/bin/activate
-            pip install -r requirements.txt
-
-
-    2️⃣ Start the API Server
-
-        uvicorn src.app_faiss:app --reload
+    ```bash
+        python3.10 -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
 
 
-    3️⃣ Open Swagger UI
+2️⃣ Start the API Server
 
-        http://127.0.0.1:8000/docs
-        Use Swagger to explore and test the API.
-
-
-    4️⃣ Build the Vector Index
-
-        Trigger index creation from Swagger or via API:
-        POST /rebuild
-        This reads documents from sample_docs/ and builds the search index.
+    uvicorn src.app_faiss:app --reload
 
 
-    5️⃣ Query the System
+3️⃣ Open Swagger UI
 
-        Example request body:
-        {
-        "query": "How do I reset my account password?",
-        "user_email": "user@example.com"
-        }
-
-        The response includes:
-        detected intent
-        confidence score
-        automation decision
-        draft path or escalation details
-
-    📤 Example Response
-
-        {
-        "query": "How do I reset my account password?",
-        "intent": "password_reset",
-        "confidence": 0.62,
-        "decision": "SAVE_DRAFT",
-        "automation": {
-            "draft_path": "drafts/draft_<ticket_id>.json"
-        }
-        }
-
-        SAVE_DRAFT indicates the response requires human review.
-        Drafts are persisted locally and not auto-sent.
+    http://127.0.0.1:8000/docs
+    Use Swagger to explore and test the API.
 
 
-    🧩 Design Decisions
+4️⃣ Build the Vector Index
 
-        This project intentionally avoids fully automated email sending.
-
-        Key design choices:
-
-        No blind auto-responses — automated replies can be risky in customer support
-        Confidence-gated actions — automation depends on retrieval confidence
-        Human-in-the-loop workflow — drafts require approval before execution
-        Explainable logic — intent detection and automation rules are rule-based
-
-        These decisions reflect how real-world support systems balance automation with safety.
+    Trigger index creation from Swagger or via API:
+    POST /rebuild
+    This reads documents from sample_docs/ and builds the search index.
 
 
-    🔮 Future Extensions
+5️⃣ Query the System
 
-        The current implementation is a proof-of-concept. Possible extensions include:
+    Example request body:
+    {
+    "query": "How do I reset my account password?",
+    "user_email": "user@example.com"
+    }
 
-        Gmail API integration for real draft creation and sending
-        LLM-based response generation on top of retrieved context
-        Admin dashboard for managing approvals and escalations
-        Integration with ticketing systems (Zendesk, Jira, etc.)
-        Confidence-based auto-approval for low-risk queries
+    The response includes:
+    detected intent
+    confidence score
+    automation decision
+    draft path or escalation details
 
-        These features are intentionally not enabled by default to keep the system safe and auditable.
+📤 Example Response
+
+    {
+    "query": "How do I reset my account password?",
+    "intent": "password_reset",
+    "confidence": 0.62,
+    "decision": "SAVE_DRAFT",
+    "automation": {
+        "draft_path": "drafts/draft_<ticket_id>.json"
+    }
+    }
+
+    SAVE_DRAFT indicates the response requires human review.
+    Drafts are persisted locally and not auto-sent.
+
+
+🧩 Design Decisions
+
+    This project intentionally avoids fully automated email sending.
+
+    Key design choices:
+
+    No blind auto-responses — automated replies can be risky in customer support
+    Confidence-gated actions — automation depends on retrieval confidence
+    Human-in-the-loop workflow — drafts require approval before execution
+    Explainable logic — intent detection and automation rules are rule-based
+
+    These decisions reflect how real-world support systems balance automation with safety.
+
+
+🔮 Future Extensions
+
+    The current implementation is a proof-of-concept. Possible extensions include:
+
+    Gmail API integration for real draft creation and sending
+    LLM-based response generation on top of retrieved context
+    Admin dashboard for managing approvals and escalations
+    Integration with ticketing systems (Zendesk, Jira, etc.)
+    Confidence-based auto-approval for low-risk queries
+
+    These features are intentionally not enabled by default to keep the system safe and auditable.
