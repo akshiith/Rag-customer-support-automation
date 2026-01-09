@@ -74,39 +74,46 @@ requirements.txt # Python dependencies
 .gitignore
 README.md
 
-## 🧪 How to Run
+🧪 How to Run
 
-### 1. Setup Environment
+1️⃣ Setup Environment
 
-```bash
 python3.10 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
-### 2. Start the API Server
+
+2️⃣ Start the API Server
 
 uvicorn src.app_faiss:app --reload
 
-### 3. Open Swagger UI:
+3️⃣ Open Swagger UI
+
 http://127.0.0.1:8000/docs
+Use Swagger to explore and test the API.
 
-### 4.Build the Vector Index
+4️⃣ Build the Vector Index
+
+Trigger index creation from Swagger or via API:
 POST /rebuild
+This reads documents from sample_docs/ and builds the search index.
 
-### 5. Query the System
+5️⃣ Query the System
+
+Example request body:
+
 {
   "query": "How do I reset my account password?",
   "user_email": "user@example.com"
 }
+
 The response includes:
 detected intent
 confidence score
 automation decision
 draft path or escalation details
 
-### 📤 Example Response
-
-```json
+📤 Example Response
 {
   "query": "How do I reset my account password?",
   "intent": "password_reset",
@@ -117,27 +124,31 @@ draft path or escalation details
   }
 }
 
-## 🧩 Design Decisions
+SAVE_DRAFT indicates the response requires human review.
+Drafts are persisted locally and not auto-sent.
+
+
+🧩 Design Decisions
 
 This project intentionally avoids fully automated email sending.
 
 Key design choices:
-- **No blind auto-responses**: Automated replies can be risky in customer support.
-- **Confidence-gated actions**: Automation decisions depend on retrieval confidence.
-- **Human-in-the-loop workflow**: Drafts are persisted and require approval before any real action.
-- **Explainable logic**: Intent detection and automation rules are rule-based, not hidden inside LLM prompts.
+
+No blind auto-responses — automated replies can be risky in customer support.
+Confidence-gated actions — automation depends on retrieval confidence.
+Human-in-the-loop workflow — drafts require approval before execution.
+Explainable logic — intent detection and automation rules are rule-based, not hidden inside LLM prompts.
 
 These decisions reflect how real-world support systems balance automation with safety.
 
-## 🔮 Future Extensions
+🔮 Future Extensions
 
 The current implementation is a proof-of-concept. Possible extensions include:
 
-- Gmail API integration for real draft creation and sending
-- LLM-based response generation on top of retrieved context
-- Admin dashboard for managing approvals and escalations
-- Integration with ticketing systems (Zendesk, Jira, etc.)
-- Confidence-based auto-approval for low-risk queries
+Gmail API integration for real draft creation and sending
+LLM-based response generation on top of retrieved context
+Admin dashboard for managing approvals and escalations
+Integration with ticketing systems (Zendesk, Jira, etc.)
+Confidence-based auto-approval for low-risk queries
 
 These features are intentionally not enabled by default to keep the system safe and auditable.
-
